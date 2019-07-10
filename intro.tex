@@ -1,0 +1,41 @@
+\section{Introduction}
+\label{sec:intro}
+
+The failure boosting technique can in some sense be
+considered the only possible avenue of attack against an
+IND-CPA secure scheme with decryption failure that has been
+transformed into an IND-CCA secure scheme using the Fujisaki-Okamoto transformation~\cite{DBLP:conf/tcc/HofheinzHK17,DBLP:conf/crypto/JiangZCWM18}. This
+technique was first used in an ad-hoc manner in CCA attacks
+against schemes with decryption failures in \jnote{TODO:cite, e.g. PQC
+forum maybe} and
+formally described by D'Anvers et
+al.~\cite{DBLP:conf/pkc/DAnversGJNVV19}. 
+
+In many encryption schemes,
+including many submitted to the NIST PQC standardization process,
+causing a sufficiently large number of
+decryption failures allows an adversary to recover the secret
+key\jnote{TODO: cite Fluhrer etc}. The idea of failure boosting comes from the fact
+that in a practical scenario\jnote{TODO: cite NIST}, an adversary is likely to be able to
+do significantly more offline computing than online
+computing actually mounting an attack against a specific scheme
+instantiation. The idea behind failure boosting is to do a significant
+amount of precomputation (via many evaluations of the secure cryptographic
+hash function used for the Fujisaki-Okamoto transform) to derive a
+large set of ``weak messages,'' that is, messages that will be more
+likely (over the randomness used in the generation of the public and
+secret key and [if any] in the decryption process) to result in a
+decryption failure. 
+
+Concretely, in terms of schemes submitted to the NIST PQC
+standardization process, a scheme needs to remains secure against up
+to $2^{64}$ CCA queries in any of the categories, while it needs to
+ be secure against an adversary able to do up to $2^{128},2^{192},2^{256}$
+total computation to be meet the requirements of NIST security categories 1,3,5
+respectively. \jnote{etc etc}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "round5vuln"
+%%% End: 

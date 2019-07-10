@@ -1,0 +1,118 @@
+% GENERAL COMPUTING STUFF
+
+\newcommand{\bit}{\ensuremath{\set{0,1}}}
+\newcommand{\pmone}{\ensuremath{\set{-1,1}}}
+
+% asymptotic stuff
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\polylog}{polylog}
+\DeclareMathOperator{\negl}{negl}
+\newcommand{\Otil}{\ensuremath{\tilde{O}}}
+
+% probability/distribution stuff
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\Var}{Var}
+
+\DeclareMathOperator{\trace}{Tr}
+\DeclareMathOperator{\lcm}{lcm}
+
+% assorted
+\DeclareMathOperator*{\wt}{wt}
+
+% hash functions
+\newcommand{\calH}{\ensuremath{\mathcal{H}}}
+\newcommand{\calX}{\ensuremath{\mathcal{X}}}
+\newcommand{\calY}{\ensuremath{\mathcal{Y}}}
+
+\newcommand{\compind}{\ensuremath{\stackrel{c}{\approx}}}
+\newcommand{\statind}{\ensuremath{\stackrel{s}{\approx}}}
+\newcommand{\perfind}{\ensuremath{\equiv}}
+
+% font for general-purpose algorithms
+\newcommand{\algo}[1]{\ensuremath{\mathsf{#1}}\xspace}
+
+% font for general-purpose computational problems
+\iflncs
+\renewcommand{\problem}[1]{\ensuremath{\mathsf{#1}}\xspace}
+\else
+\newcommand{\problem}[1]{\ensuremath{\mathsf{#1}}\xspace}
+\fi
+
+% font for complexity classes
+\newcommand{\class}[1]{\ensuremath{\mathsf{#1}}\xspace}
+
+% complexity classes and languages
+\renewcommand{\P}{\class{P}}
+\newcommand{\BPP}{\class{BPP}}
+\newcommand{\NP}{\class{NP}}
+\newcommand{\coNP}{\class{coNP}}
+\newcommand{\AM}{\class{AM}}
+\newcommand{\coAM}{\class{coAM}}
+\newcommand{\IP}{\class{IP}}
+\newcommand{\SZK}{\class{SZK}}
+\newcommand{\NISZK}{\class{NISZK}}
+\newcommand{\NICZK}{\class{NICZK}}
+\newcommand{\PPP}{\class{PPP}}
+\newcommand{\PPAD}{\class{PPAD}}
+
+\newcommand{\yes}{\ensuremath{\text{YES}}}
+\newcommand{\no}{\ensuremath{\text{NO}}}
+
+\newcommand{\Piyes}{\ensuremath{\Pi^{\yes}}}
+\newcommand{\Pino}{\ensuremath{\Pi^{\no}}}
+
+%\DeclareMathOperator{\trace}{Tr}
+%\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\msb}{msb}
+\DeclareMathOperator{\lsb}{lsb}
+\DeclareMathOperator{\rad}{rad}
+
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\ord}{\ensuremath{\text{ord}}}
+
+\newcommand{\calA}{\ensuremath{\mathcal{A}}}
+\newcommand{\calB}{\ensuremath{\mathcal{B}}}
+\newcommand{\calC}{\ensuremath{\mathcal{C}}}
+\newcommand{\calD}{\ensuremath{\mathcal{D}}}
+\newcommand{\calE}{\ensuremath{\mathcal{E}}}
+\newcommand{\calF}{\ensuremath{\mathcal{F}}}
+\newcommand{\calG}{\ensuremath{\mathcal{G}}}
+\newcommand{\calI}{\ensuremath{\mathcal{I}}}
+\newcommand{\calJ}{\ensuremath{\mathcal{J}}}
+\newcommand{\calK}{\ensuremath{\mathcal{K}}}
+\newcommand{\calL}{\ensuremath{\mathcal{L}}}
+\newcommand{\calM}{\ensuremath{\mathcal{M}}}
+\newcommand{\calN}{\ensuremath{\mathcal{N}}}
+\newcommand{\calO}{\ensuremath{\mathcal{O}}}
+\newcommand{\calP}{\ensuremath{\mathcal{P}}}
+\newcommand{\calQ}{\ensuremath{\mathcal{Q}}}
+\newcommand{\calR}{\ensuremath{\mathcal{R}}}
+\newcommand{\calS}{\ensuremath{\mathcal{S}}}
+\newcommand{\calT}{\ensuremath{\mathcal{T}}}
+\newcommand{\calU}{\ensuremath{\mathcal{U}}}
+\newcommand{\calV}{\ensuremath{\mathcal{V}}}
+\newcommand{\calW}{\ensuremath{\mathcal{W}}}
+\newcommand{\calZ}{\ensuremath{\mathcal{Z}}}
+
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frakp}{\mathfrak{p}}
+
+
+%\algnotext{EndFor}
+%\algnotext{EndIf}
+%\algnotext{EndWhile}
+
+% fix weird spacing of \pmod, and introduce \pmod* command; see
+% http://tex.stackexchange.com/questions/39221/removing-extra-space-with-pmod-command
+\makeatletter
+\renewcommand{\pod}[1]{\mathchoice
+  {\allowbreak \if@display \mkern 18mu\else \mkern 8mu\fi (#1)}
+  {\allowbreak \if@display \mkern 18mu\else \mkern 8mu\fi (#1)}
+  {\mkern4mu(#1)}
+  {\mkern4mu(#1)}
+}
+\makeatletter
+\let\@@pmod\pmod
+\DeclareRobustCommand{\pmod}{\@ifstar\@pmods\@@pmod}
+\def\@pmods#1{\mkern4mu({\operator@font mod}\mkern 6mu#1)}
+\makeatother

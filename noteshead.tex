@@ -1,0 +1,22 @@
+% MARGIN NOTES
+
+\newif\ifnotes\notestrue
+%\newif\ifnotes\notesfalse
+
+
+\ifnotes
+\usepackage{color}
+\definecolor{mygrey}{gray}{0.50}
+\newcommand{\noteby}[2]{{\textcolor{mygrey}{\footnotesize{\bf (#1:} {#2}{\bf ) }}}}
+\newcommand{\noteswarning}{{\begin{center} {\Large WARNING: NOTES ON}\end{center}}}
+
+\else
+
+\newcommand{\noteby}[2]{{}}
+\newcommand{\noteswarning}{{}}
+
+\fi
+
+\newcommand{\cnote}[1]{{\noteby{Chris}{#1}}}
+\newcommand{\jnote}[1]{{\noteby{Jacob}{#1}}}
+\newcommand{\dnote}[1]{{\noteby{Daniel}{#1}}}

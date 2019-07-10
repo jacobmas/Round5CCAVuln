@@ -1,0 +1,37 @@
+\subsection{Towards Relevance for NIST Candidate Algorithms}
+\label{sec:towards-relev-nist}
+
+\jnote{TODO: completely rewrite these were some probably unreadable
+  thoughts when we were just going to write a note about the Indian
+  guys work}
+In terms of 2nd round submissions to NIST, Frodo appears to be the
+only scheme to which this result is potentially relevant.
+
+Round5, the
+  other 2nd round NIST submission using unstructured lattices, is both
+  based on the \emph{Learning with Rounding} problem and makes use of
+  a sparse secret distribution, which appears to make Regev's
+  reduction totally irrelevant.\footnote{this does not mean Round5 is
+    insecure, only that it is much much farther from being covered by
+    a reduction than Frodo is}
+
+To attempt to determine what parameters Frodo needs to be scaled up to
+in order to claim a non-vacuous reduction even in the random oracle
+model, the reduction ought to be analyzed with respect to a proper
+noise parameter $\alpha$ is the primary 
+
+\jnote{TODO: describe why the LWE in the public key is the meaningful
+  one for the reduction, e.g. if there exists an LWE adversary which
+  breaks on the higher-noise samples in Enc, we can transform it into
+  an adversary that breaks on the public key alone by creating the
+  necessary additional samples from the public key}
+
+
+In addition, in an actual run of the protocol, the ``bad cases'' of  
+
+For the public key, 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "regevreduction"
+%%% End: 

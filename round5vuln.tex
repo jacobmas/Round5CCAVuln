@@ -1,0 +1,115 @@
+\newif\iflncs\lncsfalse
+%
+\documentclass{article}
+\pagestyle{plain}
+
+%\usepackage{times}        // Not Allowed for TCC ---Daniel
+%\usepackage{fullpage}    // Not Allowed for TCC submission ---Daniel
+\usepackage{microtype}
+\usepackage{amsmath,amsfonts,amssymb}
+\iflncs
+\else
+\usepackage{amsthm}
+\fi
+%\usepackage{hyperref}
+% mathabx overrides many math fonts with ugly ones; instead, add
+% individual commands in head.tex (see declaration of \boxplus etc.)
+%\usepackage{mathabx}
+%\usepackage[amsmath,amsthm,thmmarks,hyperref]{ntheorem}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{enumitem}
+
+% show equation numbers only for referenced equations
+%\mathtoolsset{showonlyrefs}
+
+\newif\iffull\fulltrue
+
+% Fix to fix line spacing
+%\linespread{1.3}
+
+\input{head}
+%\input{paperhead}
+
+
+\newcommand{\Lat}{\Lambda}
+
+\newcommand{\setbad}{\textsf{BAD}}
+\newcommand{\setguesses}{\textsf{GUESSES}}
+
+
+\usepackage{xcolor}
+\newcommand{\daniel}[1]{Daniecl: #1}
+\newcommand{\todo}[1]{TO-DO: #1}
+
+\pagestyle{plain}
+
+
+%%%%
+
+\title{Note on CCA }
+
+\iflncs
+\author{%
+  Jacob Alperin-Sheriff\inst{1}
+\and Daniel Apon\inst{1}
+}
+
+\institute{NIST}
+\else
+\author{%
+  Jacob Alperin-Sheriff
+\and Daniel Apon
+}
+\fi
+
+\begin{document}
+ % \floatstyle{boxed}
+ % \restylefloat{figure}
+
+\maketitle
+\thispagestyle{plain}
+\begin{abstract}
+%  
+%  
+%\input{abstract}
+
+
+\end{abstract}
+
+\newpage
+% \paragraph{Keywords.} fully homomorphic encryption, bootstrapping,
+% lattice-based cryptography
+
+%\clearpage
+%\pagenumbering{arabic} 
+\input{intro}
+
+\input{round5}
+
+
+\section*{Acknowledgments}
+None for now!
+
+
+\bibliographystyle{alpha}
+
+\bibliography{lattices,crypto,ibe,fhe,numtheory}
+
+% \iflncs
+
+% \else
+% \appendix 
+
+% %\input{backgrounddefs}
+% \input{app_module_extlwe}
+% \fi
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

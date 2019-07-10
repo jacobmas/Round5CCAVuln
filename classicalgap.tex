@@ -1,0 +1,64 @@
+\section{Classical Reduction for Learning With Errors}
+\label{sec:classic-reduction}
+
+Here we calculate the concrete tightness of the \emph{classical} reduction of $\gapsvp$ to $\lwe$ obtained by combining the classical portion of Regev's reduction, 
+Peikert's reduction in~\cite{DBLP:journals/eccc/Peikert08}, and
+Brakerski et al.'s reduction
+in~\cite{DBLP:journals/corr/BrakerskiLPRS13}
+
+
+\jnote{TODO: worth noting how much better the reduction is under their
+  plausible tighter parameters, see if it's worth trying to find a
+  proof of}
+
+\begin{lemma}[Lemma 3.6,~\cite{DBLP:journals/jcss/GoldreichG00}]
+Let $S_0$ be a unit $n$-dimensional ball at the origin, $S_{\epsilon}$ be a unit
+$n$-dimensional ball at distance $\epsilon$ from the origin. Then 
+\[\frac{\text{vol}(S_0  \cap S_{\epsilon})}{\text{vol}(S_0)}>\epsilon(1-\epsilon^2)^{(n-1)/2}\frac{\sqrt{n}}{3}\]
+\end{lemma}
+
+\begin{corollary}
+For constants $c, d > 0$ and any $\vecz \in \R^n$ with $\length{z}
+\leq d$ and $d'=d \cdot \sqrt{n}$, we have 
+\[\Delta(U(d' \cdot \ball_{n}), U(\vecz+d' \cdot
+  \ball_{n})) \leq 1-\frac{1}{3} \leq .8\]  
+\end{corollary}
+
+\begin{proof}
+Follows via a simple calculation after noting that scaling doesn't
+change the probability, setting $\epsilon=d/d'=\tfrac{1}{sqrt{n}}$. 
+\end{proof}
+
+\jnote{Pretty sure the $\sqrt{log n}$ factor isn't ``worth it'' in
+  terms of reduction but I could be wrong}
+
+\jnote{First write in terms of each call to Regev's reduction}
+
+\begin{itemize}
+\item Let $C_2$ be the cost of sampling a point $\vecw$ uniformly at
+  random to sufficient
+  precision from the ball $d' \cdot \ball^{n}$.
+\item Let $C_3$ be the cost of reducing $\vecw$ modulo $\matB$, so $C_3=O(n^2)$ 
+\item NO Instance:
+\begin{itemize}
+\item Each call to Regev's reduction with $(\matB,\vecx)$ will have cost $C_1$, and
+  succeeds when $(\matB,\vecd)$ is a NO instance
+  (i.e. $\lambda_{1}(\lat) > \gamma d$) with probability $p_1$ ($p_1$ will
+  have to be exponentially close to 1, but how close matters in
+  optimizing parameters). Note that $C_1$ needs to incorporate the cost of
+  sampling from $D_{\Lat^*,r}$ with sufficient precision (\jnote{does
+    using the GPV08 sampling algorithm instead of that bootstrapping
+    stuff as Peikert's paper assumes is happening, reduce the concrete cost of Regev's algorithm at all?})
+
+\item $N$ total calls are made to Regev's reduction.
+\item Thus, in a NO instance, we do $O((C_1+C_2+C_3)N)$ work and accept with
+  probability $p_1^{N}$. $C_1$ should dwarf $C_2$ and $C_3$. 
+\end{itemize} 
+
+\end{itemize}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "regevreduction"
+%%% End: 
