@@ -1,0 +1,64 @@
+\section{CCA Attack Against Round5}
+\label{sec:cca-attack-against}
+
+\subsection{Form of Product in Cyclotomic}
+\label{sec:form-prod-cycl}
+
+
+
+\begin{lemma}
+\label{lem:mult-form}
+Let $R=\Z[x]/\inner{\Phi_{p}(x)}$ be the ring of integers of the $p$th cyclotomic field with standard power basis $1,\omega,\ldots,\omega^{p-2}$ where $\omega$ is a primitive $p$th root of unity, $v, w \in R$.
+
+Let $x=v \cdot w \bmod{R}, x=x_{p-2}\omega^{p-2}+x_{p-1}\omega^{p-1}+\ldots+x_{1}\omega+x_{0}$. 
+
+Let $S_{i}=\{j \in [1,\ldots,p-2]: j \neq (i+1)\}$
+Then 
+\[x_{i}=\sum_{j \in S_{i}}v_{j}\left(w_{((i-j)\bmod{p})}-w_{(p-1-j)\bmod{p}}\right)+v_0w_{i}+z_{i},\]
+
+where 
+\[z_i=\begin{cases}0&\text{if }i=p-2\\
+v_{i+1}w_{p-2-i}&\text{if }i<p-2\\\end{cases}\]
+\end{lemma}
+
+\begin{proof}
+TODO
+\end{proof}
+
+
+\subsection{Probability Lemmas}
+\label{sec:probability-lemmas}
+
+\begin{lemma}
+\label{lem:prob-hits}
+Let $\text{H}_{n,h} = \{\vecx \in \{-1,0,1\}^{n} \mid \text{Wt}(\vecx)=h,\sum_{i=0}^{n-1}x_i=0\}$ be the set of balanced Hamming weight h $\{-1,0,1\}$ vectors of dimension $n$.
+
+Let $W_{\vecx} = \{i \in [0,\ldots,n-1] \mid x_{i} \neq 0\}$,
+$W_{\vecx}^{+} = \{i \in [0,\ldots,n-1] \mid x_{i} = 1\}$,
+$W_{\vecx}^{-}=W_{\vecx} - W_{\vecx}^{+}$ 
+
+
+
+
+
+Let $K \subseteq S_{i}$ where $S_{i}$ is as in Lemma ~\ref{lem:mult-form}. 
+
+
+Then \[\Pr_{\vecx \gets \text{H}_{n,h}}[\abs{W_{\vecx} \cap K} =
+  j,\abs{W_{\vecx}^{+} \cap K}= \ell]
+  =\frac{\binom{k}{j} \cdot \binom{n-k}{h-j} \cdot
+    \binom{j}{\ell}}{\binom{n}{h} \cdot \binom{h}{h/2}}\]
+\end{lemma}
+
+\begin{proof}
+Follows by definitions and sizes of sets \jnote{TODO: make effective
+  lower bound using that dude's approximation for factorial Stirling iir}
+\end{proof}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "round5vuln"
+%%% End: 
+
+
