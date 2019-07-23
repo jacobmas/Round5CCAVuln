@@ -1,7 +1,110 @@
 \section{Round 5 Description}
 \label{sec:round-5-desc}
 
+For the Category 5 Ring-LWE parameters found in Table 11
+of~\cite{Round5_NISTPQCRound2}, Round 5 can be written as follows:
 
+Let $\text{H}_{n,h} = \{\vecx \in \{-1,0,1\}^{n} \mid
+\text{Wt}(\vecx)=h,\sum_{i=0}^{n-1}x_i=0\}$.
+
+\jnote{TODO: rewrite just as CPA scheme, say Fujisaki-Okamoto transform used}
+\begin{algorithm}
+    \SetKwInOut{Input}{-}
+    \SetKwInOut{Output}{pk,sk}
+
+    $\sigma \gets \bit^{\kappa}$\
+
+    $a = f_{n}(\sigma)$\
+
+    $sk \gets \bit^{\kappa}$\
+
+    $s \gets \text{H}_{n,h}(sk)$\
+
+    $b = \round{\tfrac{p}{q}(a\cdot s)}_{[p]}$\
+
+    $sk \gets \bit^{\kappa}$\
+
+    $pk = (\sigma,b)$\
+
+    \Return{$(pk,sk)$}\
+
+    \caption{Gen}
+\end{algorithm}
+
+\begin{algorithm}
+    \SetKwInOut{Input}{$pk=(\sigma,b)$}
+    \SetKwInOut{Output}{$ct=(u,v,g)$}
+
+    $m \gets \bit^{\kappa}$\
+
+    $(L,g,\rho)=G(m||pk)$\
+
+    $a=f_{n}(\sigma)$\
+    
+    $r \gets \text{H}_{n,h}(\rho)$\
+
+    $u=\round{\tfrac{p}{q}(a\cdot r)}_{[p]}$\
+
+    $v=\text{Sample}_{\mu}(\round{\tfrac{t}{p} (b \cdot r)}_{[t]})$\
+
+    $ct=(u,v,g)$\
+
+    $k=H(L||ct)$\
+
+    \Return{$(ct,k)$}\
+
+    \caption{Encapsulate}
+\end{algorithm}
+
+\begin{algorithm}
+    \SetKwInOut{Input}{$pk=(\sigma,b)$}
+    \SetKwInOut{Output}{$ct=(u,v,g)$}
+
+    $m \gets \bit^{\kappa}$\
+
+    $(L',g',\rho')=G(m'||pk)$\
+
+    $a=f_{n}(\sigma)$\
+    
+    $r \gets \text{H}_{n,h}(\rho)$\
+
+    $u=\round{\tfrac{p}{q}(a\cdot r)}_{[p]}$\
+
+    $v=\text{Sample}_{\mu}(\round{\tfrac{t}{p} (b \cdot r)}_{[t]})$\
+
+    $ct=(u,v,g)$\
+
+    $k=H(L||ct)$\
+
+    \Return{$(ct,k)$}\
+
+    \caption{Decapsulate}
+\end{algorithm}
+
+\jnote{TODO: rest}
+
+\subsection{Correctness}
+\label{sec:correctness}
+
+\begin{lemma}
+\label{lem:correctness}
+Let $e_1 = \tfrac{q}{p}b-as$, $e_2=\tfrac{q}{p}u-ar$,
+$e_3=\tfrac{p}{t}v-br$. 
+
+Let
+\begin{equation*}
+\label{eq:erroroverall}
+\tilde{e}=e_1\cdot r+\tfrac{q}{p}e_3-s\cdot e_2 \bmod{q}
+\end{equation*}
+
+Then decryption will be correct if and only if for every utilized
+coordinate output by $\text{Sample}_{\mu}$, we have that $-q/4 \leq
+\tilde{e} < q/4$. 
+\end{lemma}
+
+\begin{proof}
+Follows immediately from identifying error terms in algorithms
+\end{proof}
 
 %%% Local Variables: 
 %%% mode: latex

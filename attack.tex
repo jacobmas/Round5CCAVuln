@@ -41,18 +41,153 @@ $W_{\vecx}^{-}=W_{\vecx} - W_{\vecx}^{+}$
 
 
 
-Let $K \subseteq S_{i}$ where $S_{i}$ is as in Lemma ~\ref{lem:mult-form}. 
+Let $K \subseteq S_{i}$ where $S_{i}$ is as in Lemma
+~\ref{lem:mult-form}, let $k=\abs{K}$. 
 
 
 Then \[\Pr_{\vecx \gets \text{H}_{n,h}}[\abs{W_{\vecx} \cap K} =
-  j,\abs{W_{\vecx}^{+} \cap K}= \ell]
+  j \wedge \abs{W_{\vecx}^{+} \cap K}= \ell]
   =\frac{\binom{k}{j} \cdot \binom{n-k}{h-j} \cdot
-    \binom{j}{\ell}}{\binom{n}{h} \cdot \binom{h}{h/2}}\]
+    \binom{j}{\ell} \cdot \binom{h-j}{h/2-\ell}}{\binom{n}{h} \cdot \binom{h}{h/2}}\]
 \end{lemma}
 
 \begin{proof}
 Follows by definitions and sizes of sets \jnote{TODO: make effective
   lower bound using that dude's approximation for factorial Stirling iir}
+\end{proof}
+
+\begin{conjecture}
+If there is a set of $K$ elements such that
+$\abs{w_{((i-j)\bmod{p})}-w_{(p-1-j)\bmod{p}}}\geq \theta$, and for
+some vector $\vecv$, 
+$\abs{W_{\vecv} \cap K} =
+  j,\abs{W_{\vecv}^{+} \cap K}= \ell$
+
+where $W_{\vecv}, W_{\vecv}^{+}$ are defined as above, then the
+probability that $x_{(i)} \geq (2l-j)\theta$ is at least $1/2$ (or is
+it $1/4$ because both probability that the positives are bigger is 1/2
+and probability the rest are same direction is one half too?)
+\end{conjecture}
+
+% ON the probability of a "high error" sample 
+\begin{fact}
+Probability of individual difference is 
+
+\[p=\sum_{i,j \in [-8,8)\times [-8,8),\theta \leq \abs{i+j}}\tfrac{1}{256}\]
+
+Then under an independence heuristic (not true but may actually
+underestimate probability), the probability of getting at least $k$
+good  ones (meaning $k$ of these thingies from the lemma above such that  $\abs{w_{((i-j)\bmod{p})}-w_{(p-1-j)\bmod{p}}}\geq \theta$)
+is  
+
+\[\sum_{i=k}^{n} \binom{n}{i}p^{i}(1-p)^{n-i}\]
+
+
+
+\end{fact}
+
+\subsection{Other Probability Lemmas}
+\label{sec:other-prob-lemm}
+
+% considering for now the coordinate for $p-2$ so that each difference
+% in Lemma~\ref{lem:mult-form}
+% becomes $w_{(p-2-j)
+%   \bmod{p}} - w_{(p-1-j) \bmod{p}}$ of consecutive terms (just for
+% some simplicity, aware it may not be a used coordinate in Round5). 
+
+\begin{definition}
+\label{def:round5_dist}
+We define the Round5 distribution as sampling uniformly from 
+\[\text{H}_{n,h} = \{\vecx \in \{-1,0,1\}^{n} \mid
+  \text{Wt}(\vecx)=h,\sum_{i=0}^{n-1}x_i=0\}\], the set of balanced Hamming weight $h$ $\{-1,0,1\}$ vectors of dimension $n$.
+\end{definition}
+
+Let $w \gets \text{H}_{n,h}$ be sampled uniformly from the Round5
+distribution.  
+
+
+Let $X^{(i)}_j$ be a random $\bit$ variable denoting the event that $\abs{w_{(i-j)
+  \bmod{n}} - w_{(n-1-j) \bmod{n}}}=2$, $Y^{(i)}_j$ be a random $\bit$ variable
+denoting the event that $\abs{w_{(i-j)
+  \bmod{n}} - w_{(n-1-j) \bmod{n}}}=1$. Let 
+
+$X^{(i)}=\sum_{j \in S_{i}}X^{(i)}_j$ be the random variable denoting the total
+number of differences of absolute value 2,  $Y^{(i)}=\sum_{j \in S_{i}}Y^{(i)}_j$
+denote the total number of differences of absolute value 1. 
+
+Then we have the following
+lemmas on moments and such. 
+
+\begin{lemma}
+\label{lem:expof2}
+Let $X^{(i)}_j, X^{(i)}$ be defined as above. Then 
+\[\E[X^{(i)}]=\tfrac{h^2\abs{S_i}}{2n(n-1)}\]
+\end{lemma}
+
+\begin{proof}
+Since $X^{(i)}_j$ is a $\bit$ variable, we have for all $j$ that
+$\E[X^{(i)}_j]=\Pr[X^{(i)}_j=1]$. We have that $X^{(i)}_j=1$ if and only if
+$w_{(i-j) \bmod{n}}$ and $w_{(n-1-j) \bmod{n}}$ are non-zero and of
+opposite signs. Thus, by the definition of the distribution, we have that 
+
+\[\E[X^{(i)}_j]=\frac{\binom{2}{2}\binom{n-2}{h-2}\binom{2}{1}\binom{h-2}{h/2-1}}{\binom{n}{h}
+    \binom{h}{h/2}} = \frac{h^2}{2n(n-1)},\] and so by linearity of
+expectation we have that $\E[X^{(i)}]=h^2\abs{S_i}/(2n(n-1))$.  
+\end{proof}
+
+\begin{lemma}
+\label{lem:expof1}
+Let $Y^{(i)}_j, Y^{(i)}$ be defined as above. Then 
+\[\E[Y^{(i)}]=\tfrac{h\abs{S_i}}{n}\]
+\end{lemma}
+
+\begin{proof}
+Since $Y^{(i)}_j$ is a $\bit$ variable, we have for all $j$ that
+$\E[Y^{(i)}_j]=\Pr[Y^{(i)}_j=1]$. We have that $Y^{(i)}_j=1$ if and only if exactly 1 of 
+$w_{(i-j) \bmod{n}}$ and $w_{(n-1-j) \bmod{n}}$ are non-zero. Thus, by definition, we have that 
+
+\[\E[Y^{(i)}_j]=\frac{\binom{2}{1}\binom{n-1}{h-1}\binom{1}{1}\binom{h-1}{h/2-1}}{\binom{n}{h}
+    \binom{h}{h/2}} = \frac{h}{n},\] and so by linearity of
+expectation we have that $\E[Y^{(i)}]=h\abs{S_i}/n$.  
+\end{proof}
+
+Now, 2nd moment time. 
+
+\begin{lemma}
+Something about 2nd moment of $X$
+\end{lemma}
+
+\begin{proof}
+First we calculate $\E[X^{(i)}_jX_k]$ for all $j,k$
+
+
+Since $X^{(i)}_j$ is a $\bit$ variable, we have that
+\[\E[(X^{(i)}_j)^2]=\E[X^{(i)}_j]=h^2/(2n(n-1))\]
+
+For $\abs{j - k} \neq n - 1 - i \bmod{n}$, we have that $X^{(i)}_j$
+and $X^{(i)}_k$ are independent, so that 
+
+\[\E[X^{(i)}_jX^{(i)}_k]=\frac{h^4}{4n^2(n-1)^2}\]
+
+Finally, consider the case where $\abs{j-k} = n - 1 - i \bmod{n}$; by
+proper ordering of $j$ and $k$ it suffices to consider
+$k-j=n-1-i\bmod{n}$. In this case, we have again that 
+$\E[X^{(i)}_jX^{(i)}_k]=\Pr[X^{(i)}_j=1 \wedge
+X^{(i)}_k=1]$. $X^{(i)}_j$ and $X^{(i)}_k=1$ are both 1 if and only if
+all 3 of $w_{(i-j) \bmod{n}}$, $w_{(n-1-j) \bmod{n}}$, $w_{(n-2-i-j)
+  \bmod{n}}$ are non-zero, $w_{(i-j) \bmod{n}}$ and  $w_{(n-2-i-j)
+  \bmod{n}}$ have the same sign and $w_{(n-1-j) \bmod{n}}$ has the
+  opposite sign from the other two. Thus, in this case we have that 
+\[E[X^{(i)}_jX^{(i)}_{(n-1-i+j)\bmod{n}}]=\frac{\binom{3}{3}\binom{n-3}{h-3}\cdot
+  2\binom{h-3}{h/2-2}}{\binom{n}{h}\binom{h}{h/2}}=\frac{h^3-2h^2}{n(n-1)(n-2)}\]
+
+
+Now, we have that 
+\[\E[(X^{(i)})^2]=\sum_{j \in S_i}E[(X^{(i)}_j)^2] + 2\sum_{j,k \in
+    S_i, j\neq k}\E[X^{(i)}_jX^{(i)}_k]\]
+
+Combining, we have that 
+\[\E[(X^{(i)})^2]=\frac{(\abs{S_i}-1)(h^3-2h^2)}{n(n-1)(n-2)}+\frac{(\abs{S_i}^2-3\abs{S_i}+2)h^4}{4n^2(n-1)^2}+\frac{\abs{S_i}\cdot h^2}{n(n-1)}\]
 \end{proof}
 
 
