@@ -4,25 +4,46 @@
 \subsection{Form of Product in Cyclotomic}
 \label{sec:form-prod-cycl}
 
-
-
 \begin{lemma}
 \label{lem:mult-form}
 Let $R=\Z[x]/\inner{\Phi_{p}(x)}$ be the ring of integers of the $p$th cyclotomic field with standard power basis $1,\omega,\ldots,\omega^{p-2}$ where $\omega$ is a primitive $p$th root of unity, $v, w \in R$.
 
-Let $x=v \cdot w \bmod{R}, x=x_{p-2}\omega^{p-2}+x_{p-1}\omega^{p-1}+\ldots+x_{1}\omega+x_{0}$. 
+Let $y=u \cdot v \bmod{R}, y=y_{p-2}\omega^{p-2}+y_{p-1}\omega^{p-1}+\ldots+y_{1}\omega+y_{0}$. 
 
 Let $S_{i}=\{j \in [1,\ldots,p-2]: j \neq (i+1)\}$
 Then 
-\[x_{i}=\sum_{j \in S_{i}}v_{j}\left(w_{((i-j)\bmod{p})}-w_{(p-1-j)\bmod{p}}\right)+v_0w_{i}+z_{i},\]
+\[y_{i}=\sum_{j \in S_{i}}\left(v_{j}\left(u_{((i-j)\bmod{p})}-u_{(p-1-j)\bmod{p}}\right)\right)+v_0u_{i}+z_{i},\]
 
 where 
 \[z_i=\begin{cases}0&\text{if }i=p-2\\
-v_{i+1}w_{p-2-i}&\text{if }i<p-2\\\end{cases}\]
+-v_{i+1}u_{p-2-i}&\text{if }i<p-2\\\end{cases}\]
 \end{lemma}
 
 \begin{proof}
-TODO
+
+
+Let 
+$\tilde{v}, \tilde{u} \in \Z[x]/\inner{x^p-1}$ be the canonical
+representatives of $v, u$ respectively
+(i.e. such that $\tilde{v}_{p-1}=\tilde{u}_{p-1}=0$, $\tilde{v}=v
+\bmod R), \tilde{u}=u \bmod R$. Then we have that 
+\[(v\cdot u) \bmod \Phi_{p}(x)=\left((\tilde{v}\cdot \tilde{u}) \bmod
+    (x^{p}-1)\right) \bmod R \]
+
+Now, let $\tilde{S}_i=\{j \in [0,\ldots,p-2]: j \neq (i+1)\}$ and let
+$\tilde{y}=\tilde{v} \cdot \tilde{u} \bmod (x^p-1)$. Then we
+have for $i \in [0,\ldots,p-1]$ that $\tilde{y}_i=\sum_{j \in \tilde{S}_i} (v_{j}u_{(i-j) \bmod p})$
+and in particular $\tilde{y}_{p-1}=\sum_{j=1}^{p-2}(v_{j}w_{(p-1-j) \bmod p})$.
+
+Now, let $y=\tilde{y} \bmod R$. Then, since
+$\omega^{p-1}=-\sum_{i=0}^{p-2}\omega^{i} \bmod R$, letting 
+$S_{i}=\{j \in [1,\ldots,p-2]: j \neq (i+1)\}$, we have as required that 
+
+\[y_{i}=\sum_{j \in S_{i}}\left(v_{j}\left(u_{((i-j)\bmod{p})}-u_{(p-1-j)\bmod{p}}\right)\right)+v_0u_{i}+z_{i},\]
+
+where 
+\[z_i=\begin{cases}0&\text{if }i=p-2\\
+-v_{i+1}u_{p-2-i}&\text{if }i<p-2\\\end{cases}\]
 \end{proof}
 
 

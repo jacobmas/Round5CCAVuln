@@ -57,26 +57,33 @@ Let $\text{H}_{n,h} = \{\vecx \in \{-1,0,1\}^{n} \mid
 \end{algorithm}
 
 \begin{algorithm}
-    \SetKwInOut{Input}{$pk=(\sigma,b)$}
-    \SetKwInOut{Output}{$ct=(u,v,g)$}
+    \SetKwInOut{Input}{$sk\in \bit^{\kappa}, ct=(u,v,g)$}
+    \SetKwInOut{Output}{$m \in \bit^{\kappa}$}
 
-    $m \gets \bit^{\kappa}$\
+    $v_{p}=\tfrac{p}{t}v$\
+
+    $s \gets \text{H}_{n,h}(sk)$\
+
+    $y \gets \round{\tfrac{2}{p}(v_{p}-\text{Sample}_{\mu}(s\cdot
+      u))}$\
+
+    $m' \gets \text{decode}(y)$
 
     $(L',g',\rho')=G(m'||pk)$\
 
     $a=f_{n}(\sigma)$\
     
-    $r \gets \text{H}_{n,h}(\rho)$\
+    $r' \gets \text{H}_{n,h}(\rho')$\
 
-    $u=\round{\tfrac{p}{q}(a\cdot r)}_{[p]}$\
+    $u'=\round{\tfrac{p}{q}(a\cdot r')}_{[p]}$\
 
-    $v=\text{Sample}_{\mu}(\round{\tfrac{t}{p} (b \cdot r)}_{[t]})$\
+    $v'=\text{Sample}_{\mu}(\round{\tfrac{t}{p} (b \cdot r')}_{[t]})$\
 
-    $ct=(u,v,g)$\
+    $ct'=(u',v',g')$\
 
-    $k=H(L||ct)$\
-
-    \Return{$(ct,k)$}\
+    \eIf{($ct=ct'$)}{
+\Return{$k=H(L'||ct)$}
+}{\Return{$k=H(random||ct)$}}
 
     \caption{Decapsulate}
 \end{algorithm}
