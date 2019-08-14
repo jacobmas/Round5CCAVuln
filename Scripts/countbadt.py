@@ -1,3 +1,4 @@
+RRR = RealField(150)
 def countbadt(h):
     maxpos=h/2
     maxneg=h/2
@@ -121,4 +122,21 @@ def new_summarize_results(filename,n,h):
                 extra+=400
             y=log(x*1.,2.)+extra
             print("{0},{1}".format(row[0],y-log_tot_settings))
+
+# compute the probabilities of getting some extreme parameters for rounding
+
+def compute_rounding_extreme_probs(n,h,min_abs,min_big):
+    ret=0
+    if min_abs<1:
+        print("BAD min_abs, must be >0")
+        return -1
+    p=RRR(((8.-min_abs)*2+1.)/16.0)
+    print("p={0}".format(p))
+        
+    for i in range(min_big,n+1):
+        curr=binomial(n,i)*power(p,i)*power((1-p),(n-i))
+ #       print("i={0},curr={1}".format(i,curr,pow(p,i),pow(1-p,n-i)))
+        ret=ret+curr
+    return ret
+    
 
